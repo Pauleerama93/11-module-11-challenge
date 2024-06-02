@@ -1,16 +1,7 @@
 [
     {
         "title": "Test Title",
-        "text": "Test text"
-    },
-    {
-        "title": "Paulee Boy",
-        "text": "Get back to work!",
-        "id": "f191c4c0-b1fa-4d88-8f4b-7b6f4e26549e"
-    },
-    {
-        "title": "This Module Is Fun!",
-        "text": "I'M LIKING THIS MODULE A LOT!",
-        "id": "cb7ddc36-9047-4b4d-80a0-6ff7d8df9467"
+        "text": "Test text",
+        "id": 1
     }
 ]
