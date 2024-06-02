@@ -1,5 +1,4 @@
-const utl = require("util");
-
+const util = require("util");
 
 const fs = require("fs")
 
@@ -14,14 +13,14 @@ class Store {
     }
 
     write(note) {
-        return writeFileAsync("db/db.json", JSON.stringify(note))
+        return writeFileAsync("db/db.json", JSON.stringify(note, null, 4))
     }
 
     getNotes() {
         return this.read().then((notes) => {
             let parsedNotes;
             try {
-                parsedNotes.push(JSON.parse(notes))
+                parsedNotes = [].concat(JSON.parse(notes))
             } catch(error) {
                 parsedNotes = []
             }
@@ -30,25 +29,27 @@ class Store {
         })
     }
 
-    addNotes(note) {
-        const { title, text } = notes 
+    addNotes(notes) {
+        const { title, text } = notes;
       
 
         if(!title || !text) {
-            throw new Error("Title and text cannot be blank")
+            throw new Error("Please add text")
         }
 
-        const newNote = { title, text, id: uuidv1()}
+        const newNote = { title, text, id: uuidv4()}
 
         return this.getNotes().then((notes) => [...notes, newNote])
         .then((updatedNotes) => this.write(updatedNotes))
         .then(() => newNote);
     }
 
-    removeNotes() {
-
+    removeNotes(id) {
+        return this.getNotes().then((notes) => notes.filter((note) => note.id !== id))
+        .then((filteredNotes) => this.write(filteredNotes))
     }
 }
 
 const a = new Store().getNotes().then((notes) => console.log(notes))
-//module.exports = new Store();
+
+module.exports = new Store();
